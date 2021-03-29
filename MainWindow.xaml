@@ -1,0 +1,28 @@
+﻿<Window x:Class="SFHelper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SFHelper"
+        mc:Ignorable="d"
+        Title="SFHelper" Height="476" Width="784">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ComboBox x:Name="TablesComboBox" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Width="175" SelectionChanged="TablesComboBox_SelectionChanged"/>
+        <ListView x:Name="TitelsText" HorizontalAlignment="Left" Margin="10,45,0,10" Width="220" SelectionChanged="TitelsText_SelectionChanged" FontSize="14" BorderBrush="{x:Null}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Button" HorizontalAlignment="Left" Height="25" Margin="193,10,0,0" VerticalAlignment="Top" Width="35"/>
+        <Border CornerRadius="10" Padding="10" Background="GhostWhite" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="525" Margin="235,45,0,10">
+            <TextBox x:Name="TextTitle" IsReadOnly="True" TextWrapping="Wrap" FontSize="14" Height="368" VerticalScrollBarVisibility="Auto"/>
+        </Border>
+        
+
+    </Grid>
+</Window>

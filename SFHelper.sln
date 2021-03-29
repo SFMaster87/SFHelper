@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SFHelper", "SFHelper.csproj", "{4B51F473-748C-4576-930F-64753D4B8428}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B51F473-748C-4576-930F-64753D4B8428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B51F473-748C-4576-930F-64753D4B8428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B51F473-748C-4576-930F-64753D4B8428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B51F473-748C-4576-930F-64753D4B8428}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B2A93D56-A782-432C-AA76-93031E34E076}
+	EndGlobalSection
+EndGlobal
