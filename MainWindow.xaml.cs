@@ -23,84 +23,56 @@ namespace SFHelper
         public MainWindow()
         {
             InitializeComponent();
-            TablesComboBox.ItemsSource = GetTables();
+            TablesComboBox.ItemsSource = DataBaseSupport.GetTables();
             TablesComboBox.SelectedIndex = 0;
-            //TitelsText.ItemsSource = GetTitles(TablesComboBox.Text);
-        }
-
-        private Dictionary<string, string> titlesValue = new Dictionary<string, string>();
-
-        private List<string> GetTables()
-        {
-            List<string> listTables = new List<string>();
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=D:\MyDataBase.db; Version=3;"))
-            {
-                connect.Open();
-                SQLiteCommand command = new SQLiteCommand
-                {
-                    Connection = connect,
-                    //CommandText = "SELECT NAME from sqlite_master"
-                    CommandText = "SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY 1"
-                };
-                using (SQLiteDataReader sqlReader = command.ExecuteReader()) 
-                { 
-                    while (sqlReader.Read())
-                    {
-                        string record = (string)sqlReader["NAME"];
-                        listTables.Add(record);
-                    }
-                }
-                connect.Close();
-                return listTables;
-            }
-        }
-        /*
-         CREATE TABLE Python(
-                    id INTEGER PRIMARY KEY
-                    UNIQUE NOT NULL,
-                    Name STRING  UNIQUE NOT NULL,
-                    TitleText TEXT);
-         */
-        private List<string> GetTitles(string table)
-        {
-            List<string> listNames = new List<string>();
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=D:\MyDataBase.db; Version=3;"))
-            {
-                connect.Open();
-                SQLiteCommand command = new SQLiteCommand
-                {
-                    Connection = connect,
-                    CommandText = "SELECT * FROM " + table
-                };
-                using (SQLiteDataReader sqlReader = command.ExecuteReader()) 
-                { 
-                    while (sqlReader.Read())
-                    {
-                        string title = sqlReader.GetValue(1).ToString();
-                        string titleText = sqlReader.GetValue(2).ToString();
-                        titlesValue[title] = titleText;
-                        listNames.Add(title);
-                    }
-                }
-                connect.Close();
-                return listNames;
-            }
+            //TitelsText.ItemsSource = GetTitles(TablesComboBox.Text);            
         }
 
         private void TablesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string nameTable = TablesComboBox.SelectedValue.ToString();
-            TitelsText.ItemsSource = GetTitles(nameTable);
-            TitelsText.SelectedIndex = 0;
+            TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(nameTable);
+            TitlesListBox.SelectedIndex = 0;
         }
-        private void TitelsText_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TitlesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            TablesComboBox.ItemsSource = DataBaseSupport.GetTables();
             TextTitle.Text = "";
-            if (TitelsText.SelectedValue != null) 
-            { 
-                string title = TitelsText.SelectedValue.ToString();
-                TextTitle.Text = titlesValue[title];
+            if (TitlesListBox.SelectedValue != null)
+            {
+                string title = TitlesListBox.SelectedValue.ToString();
+                TextTitle.Text = DataBaseSupport.records[title];
             }
+        }
+
+        private void EditButtonOnOff_Checked(object sender, RoutedEventArgs e)
+        {
+            TextTitle.IsReadOnly = false;
+        }
+
+        private void EditButtonOnOff_Unchecked(object sender, RoutedEventArgs e)
+        {
+            TextTitle.IsReadOnly = true;
+        }
+
+        private void AddTitleButton_Click(object sender, RoutedEventArgs e)
+        {
+            //AddTitleWindow addTitleWindow = new AddTitleWindow();
+            //addTitleWindow.Show();
+        }
+
+        private void AddTableButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddTableWindow addTableWindow = new AddTableWindow();
+            addTableWindow.Show();
+        }
+                
+        private void Window_Activated(object sender, EventArgs e)
+        {
+            TablesComboBox.ItemsSource = DataBaseSupport.GetTables();
+            string nameTable = TablesComboBox.SelectedValue.ToString();
+            TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(nameTable);
+            TitlesListBox.SelectedIndex = 0;
         }
     }
 }

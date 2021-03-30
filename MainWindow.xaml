@@ -3,26 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SFHelper"
+        xmlns:local="clr-namespace:SFHelper" xmlns:ToggleSwitch="clr-namespace:ToggleSwitch;assembly=ToggleSwitch"
         mc:Ignorable="d"
-        Title="SFHelper" Height="476" Width="784">
+        WindowStartupLocation="CenterScreen"
+        Title="SFHelper" Height="476" Width="714" Activated="Window_Activated">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <ComboBox x:Name="TablesComboBox" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Width="175" SelectionChanged="TablesComboBox_SelectionChanged"/>
-        <ListView x:Name="TitelsText" HorizontalAlignment="Left" Margin="10,45,0,10" Width="220" SelectionChanged="TitelsText_SelectionChanged" FontSize="14" BorderBrush="{x:Null}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button Content="Button" HorizontalAlignment="Left" Height="25" Margin="193,10,0,0" VerticalAlignment="Top" Width="35"/>
-        <Border CornerRadius="10" Padding="10" Background="GhostWhite" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Width="525" Margin="235,45,0,10">
-            <TextBox x:Name="TextTitle" IsReadOnly="True" TextWrapping="Wrap" FontSize="14" Height="368" VerticalScrollBarVisibility="Auto"/>
-        </Border>
-        
-
+        <ToggleSwitch:HorizontalToggleSwitch
+            x:Name="EditButtonOnOff"
+            IsChecked="False"
+            VerticalAlignment="Bottom"
+            Margin="0,0,11,13"
+            HorizontalAlignment="Right" Width="81" Height="35" Checked="EditButtonOnOff_Checked" Unchecked="EditButtonOnOff_Unchecked"/>
+        <ComboBox x:Name="TablesComboBox" Margin="10,10,0,0" SelectionChanged="TablesComboBox_SelectionChanged" HorizontalAlignment="Left" Width="220" Height="30" VerticalAlignment="Top"/>
+        <ListBox  x:Name="TitlesListBox" Margin="10,90,0,56" SelectionChanged="TitlesListBox_SelectionChanged" HorizontalAlignment="Left" Width="220"/>
+        <Button x:Name="AddTableButton" Content="Добавить раздел" HorizontalAlignment="Left" Height="40" Margin="10,45,0,0" VerticalAlignment="Top" Width="105" Click="AddTableButton_Click"/>
+        <TextBox x:Name="TextTitle" IsReadOnly="True" TextWrapping="Wrap" FontSize="14" VerticalScrollBarVisibility="Auto" Margin="235,10,11,56" AcceptsReturn="True"/>
+        <Button x:Name="AddTitleButton" Content="Добавить тему" HorizontalAlignment="Left" Margin="10,0,0,10" Width="100" Click="AddTitleButton_Click" Height="41" VerticalAlignment="Bottom"/>
+        <Button x:Name="DelTableButton" Content="Удалить раздел" HorizontalAlignment="Left" Height="40" Margin="126,45,0,0" VerticalAlignment="Top" Width="105"/>
+        <Button x:Name="DelTitleButton" Content="Удалить тему" Margin="130,0,0,10" Click="AddTitleButton_Click" Height="41" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100"/>
     </Grid>
 </Window>
