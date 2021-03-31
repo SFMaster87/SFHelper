@@ -30,9 +30,13 @@ namespace SFHelper
 
         private void TablesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string nameTable = TablesComboBox.SelectedValue.ToString();
-            TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(nameTable);
-            TitlesListBox.SelectedIndex = 0;
+            if (TablesComboBox.SelectedValue != null)
+            {
+                string nameTable = TablesComboBox.SelectedValue.ToString();
+                TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(nameTable);
+                TitlesListBox.SelectedIndex = 0;
+            }
+            
         }
         private void TitlesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -70,9 +74,24 @@ namespace SFHelper
         private void Window_Activated(object sender, EventArgs e)
         {
             TablesComboBox.ItemsSource = DataBaseSupport.GetTables();
-            string nameTable = TablesComboBox.SelectedValue.ToString();
-            TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(nameTable);
-            TitlesListBox.SelectedIndex = 0;
+            if (TablesComboBox.SelectedValue != null)
+            {
+                string nameTable = TablesComboBox.SelectedValue.ToString();
+                if (nameTable.Length > 0)
+                {
+                    TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(nameTable);
+                }
+            }
+        }
+
+        private void DelTableButton_Click(object sender, RoutedEventArgs e)
+        {
+            string str = TablesComboBox.Text.ToString();
+            DataBaseSupport.DeleteTable(str);
+            TablesComboBox.ItemsSource = DataBaseSupport.GetTables();
+            if(TablesComboBox.SelectedValue != null) { 
+                TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(TablesComboBox.SelectedValue.ToString());
+            }
         }
     }
 }

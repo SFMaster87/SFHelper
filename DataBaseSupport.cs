@@ -81,5 +81,22 @@ namespace SFHelper
                 connect.Close();
             }
         }
+
+        public static void DeleteTable(string NameTable)
+        {
+            string commandStr = "drop table " + NameTable + ";";
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=D:\MyDataBase.db; Version=3;"))
+            {
+                connect.Open();
+                SQLiteCommand command = new SQLiteCommand
+                {
+                    Connection = connect,
+                    CommandText = commandStr
+                };
+                command.ExecuteNonQuery();
+                //connect.BeginTransaction();
+                connect.Close();
+            }
+        }
     }
 }
