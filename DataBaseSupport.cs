@@ -32,13 +32,7 @@ namespace SFHelper
                 return listTables;
             }
         }
-        /*
-         CREATE TABLE Python(
-                    id INTEGER PRIMARY KEY
-                    UNIQUE NOT NULL,
-                    Name STRING  UNIQUE NOT NULL,
-                    TitleText TEXT);
-         */
+                
         public static List<string> GetTitles(string table)
         {
             List<string> listNames = new List<string>();
@@ -95,6 +89,37 @@ namespace SFHelper
                 };
                 command.ExecuteNonQuery();
                 //connect.BeginTransaction();
+                connect.Close();
+            }
+        }
+
+        public static void CreateTitle(string nameTable, string nameTitle)
+        {
+            string commandStr = @"INSERT INTO " + @nameTable + @" (Name, TitleText) VALUES ('" + @nameTitle + @"', 'Text');";
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=D:\MyDataBase.db; Version=3;"))
+            {
+                connect.Open();
+                SQLiteCommand command = new SQLiteCommand
+                {
+                    Connection = connect,
+                    CommandText = commandStr
+                };
+                command.ExecuteNonQuery();
+                connect.Close();
+            }
+        }
+
+        public static void SendQuery(string query)
+        {
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=D:\MyDataBase.db; Version=3;"))
+            {
+                connect.Open();
+                SQLiteCommand command = new SQLiteCommand
+                {
+                    Connection = connect,
+                    CommandText = query
+                };
+                command.ExecuteNonQuery();
                 connect.Close();
             }
         }

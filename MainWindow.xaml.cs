@@ -52,17 +52,20 @@ namespace SFHelper
         private void EditButtonOnOff_Checked(object sender, RoutedEventArgs e)
         {
             TextTitle.IsReadOnly = false;
+            PrimenitButton.IsEnabled = true;
         }
 
         private void EditButtonOnOff_Unchecked(object sender, RoutedEventArgs e)
         {
             TextTitle.IsReadOnly = true;
+            PrimenitButton.IsEnabled = false;
         }
 
         private void AddTitleButton_Click(object sender, RoutedEventArgs e)
         {
-            //AddTitleWindow addTitleWindow = new AddTitleWindow();
-            //addTitleWindow.Show();
+            AddTitleWindow addTitleWindow = new AddTitleWindow();
+            addTitleWindow.nameTable = TablesComboBox.SelectedValue.ToString();            
+            addTitleWindow.Show();
         }
 
         private void AddTableButton_Click(object sender, RoutedEventArgs e)
@@ -90,6 +93,31 @@ namespace SFHelper
             DataBaseSupport.DeleteTable(str);
             TablesComboBox.ItemsSource = DataBaseSupport.GetTables();
             if(TablesComboBox.SelectedValue != null) { 
+                TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(TablesComboBox.SelectedValue.ToString());
+            }
+        }
+
+        private void DelTitleButton_Click(object sender, RoutedEventArgs e)
+        {
+            string query = String.Format("DELETE FROM {0} WHERE NAME='{1}';",
+                                        TablesComboBox.SelectedValue.ToString(), 
+                                        TitlesListBox.SelectedItem.ToString()); 
+            DataBaseSupport.SendQuery(query);
+            if (TablesComboBox.SelectedValue != null)
+            {
+                TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(TablesComboBox.SelectedValue.ToString());
+            }
+        }
+
+        private void PrimenitButton_Click(object sender, RoutedEventArgs e)
+        {
+            string query = String.Format("UPDATE {0} SET TitleText='{1}' WHERE NAME='{2}';", 
+                    TablesComboBox.SelectedValue.ToString(),
+                    TextTitle.Text,
+                    TitlesListBox.SelectedItem.ToString());
+            DataBaseSupport.SendQuery(query);
+            if (TablesComboBox.SelectedValue != null)
+            {
                 TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(TablesComboBox.SelectedValue.ToString());
             }
         }

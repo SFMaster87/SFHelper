@@ -15,21 +15,23 @@ using System.Windows.Shapes;
 namespace SFHelper
 {
     /// <summary>
-    /// Interaction logic for AddWindow.xaml
+    /// Interaction logic for AddTitleWindow.xaml
     /// </summary>
-    public partial class AddTableWindow : Window
+    public partial class AddTitleWindow : Window
     {
-        public AddTableWindow()
+        public AddTitleWindow()
         {
             InitializeComponent();
         }
+        public string nameTable = "";
 
         private void textBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
-                string nameTable = textBox.Text;
-                DataBaseSupport.CreateTable(nameTable);
+                string nameTitle = textBox.Text;
+                if(nameTitle.Length > 0 && nameTable.Length > 0)
+                    DataBaseSupport.CreateTitle(nameTable, nameTitle);
                 Close();
             }
         }

@@ -33,3 +33,5 @@ C:\Users\FEDOROVSI\source\repos\SFHelper\obj\Debug\SFHelper.pdb
 C:\Users\FEDOROVSI\source\repos\SFHelper\obj\Debug\SFHelper.csprojAssemblyReference.cache
 C:\Users\FEDOROVSI\source\repos\SFHelper\obj\Debug\AddTableWindow.g.cs
 C:\Users\FEDOROVSI\source\repos\SFHelper\obj\Debug\AddTableWindow.baml
+C:\Users\FEDOROVSI\source\repos\SFHelper\obj\Debug\AddTitleWindow.g.cs
+C:\Users\FEDOROVSI\source\repos\SFHelper\obj\Debug\AddTitleWindow.baml
