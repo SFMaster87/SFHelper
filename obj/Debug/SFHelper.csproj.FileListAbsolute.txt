@@ -34,3 +34,4 @@ C:\Users\FEDOROVSI\source\repos\SFHelper\obj\Debug\SFHelper.csproj.CoreCompileIn
 C:\Users\FEDOROVSI\source\repos\SFHelper\obj\Debug\SFHelper.csproj.CopyComplete
 C:\Users\FEDOROVSI\source\repos\SFHelper\obj\Debug\SFHelper.exe
 C:\Users\FEDOROVSI\source\repos\SFHelper\obj\Debug\SFHelper.pdb
+C:\Users\FEDOROVSI\source\repos\SFHelper\obj\Debug\SFHelper.csprojAssemblyReference.cache

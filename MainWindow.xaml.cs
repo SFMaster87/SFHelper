@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data.SQLite;
+using System.Text.RegularExpressions;
 
 namespace SFHelper
 {
@@ -120,6 +121,20 @@ namespace SFHelper
             {
                 TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(TablesComboBox.SelectedValue.ToString());
             }
+        }
+
+        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {            
+            Regex regex = new Regex(searchBox.Text, RegexOptions.IgnoreCase);
+            foreach (string item in TitlesListBox.Items)
+            {
+                MatchCollection matches = regex.Matches(item);
+                if (matches.Count > 0)
+                {
+                    foreach (Match match in matches)
+                        TitlesListBox.SelectedItem = item;
+                }
+            }            
         }
     }
 }
