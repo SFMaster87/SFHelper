@@ -9,10 +9,12 @@ namespace SFHelper
     public class DataBaseSupport
     {
         public static Dictionary<string, string> records = new Dictionary<string, string>();
+
+        public static string pathDataBaseFile = "DataSource=" + @Environment.CurrentDirectory + @"\MyDataBase.db;Version=3;";
         public static List<string> GetTables()
         {
-            List<string> listTables = new List<string>();
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=D:\MyDataBase.db; Version=3;"))
+            List<string> listTables = new List<string>();            
+            using (SQLiteConnection connect = new SQLiteConnection(pathDataBaseFile))
             {
                 connect.Open();                
                 SQLiteCommand command = new SQLiteCommand
@@ -36,7 +38,7 @@ namespace SFHelper
         public static List<string> GetTitles(string table)
         {
             List<string> listNames = new List<string>();
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=D:\MyDataBase.db; Version=3;"))
+            using (SQLiteConnection connect = new SQLiteConnection(pathDataBaseFile))
             {
                 connect.Open();                
                 SQLiteCommand command = new SQLiteCommand
@@ -62,7 +64,7 @@ namespace SFHelper
         public static void CreateTable(string NameTable)
         {
             string commandStr = @"CREATE TABLE " + @NameTable + @"(id INTEGER PRIMARY KEY UNIQUE NOT NULL, Name STRING  UNIQUE NOT NULL, TitleText TEXT);";
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=D:\MyDataBase.db; Version=3;"))
+            using (SQLiteConnection connect = new SQLiteConnection(pathDataBaseFile))
             {
                 connect.Open();
                 SQLiteCommand command = new SQLiteCommand
@@ -79,7 +81,7 @@ namespace SFHelper
         public static void DeleteTable(string NameTable)
         {
             string commandStr = "drop table " + NameTable + ";";
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=D:\MyDataBase.db; Version=3;"))
+            using (SQLiteConnection connect = new SQLiteConnection(pathDataBaseFile))
             {
                 connect.Open();
                 SQLiteCommand command = new SQLiteCommand
@@ -96,7 +98,7 @@ namespace SFHelper
         public static void CreateTitle(string nameTable, string nameTitle)
         {
             string commandStr = @"INSERT INTO " + @nameTable + @" (Name, TitleText) VALUES ('" + @nameTitle + @"', 'Text');";
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=D:\MyDataBase.db; Version=3;"))
+            using (SQLiteConnection connect = new SQLiteConnection(pathDataBaseFile))
             {
                 connect.Open();
                 SQLiteCommand command = new SQLiteCommand
@@ -111,7 +113,7 @@ namespace SFHelper
 
         public static void SendQuery(string query)
         {
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=D:\MyDataBase.db; Version=3;"))
+            using (SQLiteConnection connect = new SQLiteConnection(pathDataBaseFile))
             {
                 connect.Open();
                 SQLiteCommand command = new SQLiteCommand
