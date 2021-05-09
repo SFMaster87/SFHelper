@@ -37,7 +37,7 @@ namespace SFHelper
                 TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(nameTable);
                 TitlesListBox.SelectedIndex = 0;
             }
-            
+
         }
         private void TitlesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -65,7 +65,7 @@ namespace SFHelper
         private void AddTitleButton_Click(object sender, RoutedEventArgs e)
         {
             AddTitleWindow addTitleWindow = new AddTitleWindow();
-            addTitleWindow.nameTable = TablesComboBox.SelectedValue.ToString();            
+            addTitleWindow.nameTable = TablesComboBox.SelectedValue.ToString();
             addTitleWindow.Show();
         }
 
@@ -74,7 +74,7 @@ namespace SFHelper
             AddTableWindow addTableWindow = new AddTableWindow();
             addTableWindow.Show();
         }
-                
+
         private void Window_Activated(object sender, EventArgs e)
         {
             TablesComboBox.ItemsSource = DataBaseSupport.GetTables();
@@ -93,7 +93,8 @@ namespace SFHelper
             string str = TablesComboBox.Text.ToString();
             DataBaseSupport.DeleteTable(str);
             TablesComboBox.ItemsSource = DataBaseSupport.GetTables();
-            if(TablesComboBox.SelectedValue != null) { 
+            if (TablesComboBox.SelectedValue != null)
+            {
                 TitlesListBox.ItemsSource = DataBaseSupport.GetTitles(TablesComboBox.SelectedValue.ToString());
             }
         }
@@ -101,8 +102,8 @@ namespace SFHelper
         private void DelTitleButton_Click(object sender, RoutedEventArgs e)
         {
             string query = String.Format("DELETE FROM {0} WHERE NAME='{1}';",
-                                        TablesComboBox.SelectedValue.ToString(), 
-                                        TitlesListBox.SelectedItem.ToString()); 
+                                        TablesComboBox.SelectedValue.ToString(),
+                                        TitlesListBox.SelectedItem.ToString());
             DataBaseSupport.SendQuery(query);
             if (TablesComboBox.SelectedValue != null)
             {
@@ -112,7 +113,7 @@ namespace SFHelper
 
         private void PrimenitButton_Click(object sender, RoutedEventArgs e)
         {
-            string query = String.Format("UPDATE {0} SET TitleText='{1}' WHERE NAME='{2}';", 
+            string query = String.Format("UPDATE {0} SET TitleText='{1}' WHERE NAME='{2}';",
                     TablesComboBox.SelectedValue.ToString(),
                     TextTitle.Text,
                     TitlesListBox.SelectedItem.ToString());
@@ -124,7 +125,7 @@ namespace SFHelper
         }
 
         private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
-        {            
+        {
             Regex regex = new Regex(searchBox.Text, RegexOptions.IgnoreCase);
             foreach (string item in TitlesListBox.Items)
             {
@@ -134,7 +135,23 @@ namespace SFHelper
                     foreach (Match match in matches)
                         TitlesListBox.SelectedItem = item;
                 }
-            }            
+            }
+        }
+
+        private void searchBoxInText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Regex regex = new Regex(searchBoxInText.Text, RegexOptions.IgnoreCase);
+            string str = TextTitle.Text;
+            MatchCollection matches = regex.Matches(str);
+            if (matches.Count > 0)
+            {
+                foreach (Match match in matches) { 
+                    TextTitle.SelectionStart = match.Index;
+                    TextTitle.SelectionLength = searchBoxInText.Text.Length;
+                    TextTitle.Focus();
+                }
+            }
+            searchBoxInText.Focus();
         }
     }
 }
